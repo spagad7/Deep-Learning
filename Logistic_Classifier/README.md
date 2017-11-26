@@ -1,5 +1,5 @@
 
-# Logistic Classifier for Hand-Written Digit Recognition
+# Logistic Classifier for Hand-Written Digits Recognition
 
 This program classifies images of hand-written digits in MNIST dataset using logistic classifier
 
