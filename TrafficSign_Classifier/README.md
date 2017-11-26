@@ -1,11 +1,6 @@
-
-# Self-Driving Car Engineer Nanodegree
-
-## Deep Learning
-
 ## Project: Traffic Sign Recognition Classifier
 
-In this project I am training a deep learning model to classify traffic signs using LeNet5 architecture. The dataset used for this project is German Traffic Sign dataset. 
+In this project I am training a deep learning model to classify traffic signs using LeNet5 architecture. The dataset used for this project is German Traffic Sign dataset.
 
 ---
 ## Dataset Summary
@@ -28,7 +23,7 @@ with open(validation_file, mode='rb') as f:
     valid = pickle.load(f)
 with open(testing_file, mode='rb') as f:
     test = pickle.load(f)
-    
+
 X_train, y_train = train['features'], train['labels']
 X_valid, y_valid = valid['features'], valid['labels']
 X_test, y_test = test['features'], test['labels']
@@ -90,7 +85,7 @@ for i in range(rows):
         collage.paste(img, (coll_x,coll_y))
         # Update thumbnail position
         coll_x += thumb_width
-        
+
     coll_y += thumb_height
 
 # Display collage
@@ -121,7 +116,7 @@ with open('signnames.csv') as file:
     csvreader = csv.reader(file)
     for row in csvreader:
         sign_names.append(row[1])
-        
+
 plt.rcParams['figure.figsize'] = (2,2)
 
 # Get random training image and print corresponding label
@@ -149,7 +144,7 @@ for i in range(n_train):
         sign_dict[y_train[i]] += 1
     else:
         sign_dict[y_train[i]] = 1
-        
+
 plt.rcParams['figure.figsize'] = (10,15)
 fig, ax = plt.subplots()
 idx = np.arange(n_classes)
@@ -188,7 +183,7 @@ for d in list(sign_dict.keys()):
         sign_count_dict[d] = int(temp)
     else:
         sign_count_dict[d] = 0
-    
+
 X_train_aug = X_train
 y_train_aug = y_train
 
@@ -214,7 +209,7 @@ for i in tqdm(range(it)):
                 y_train_aug = np.append(y_train_aug, y_train_aug[i])
                 y_train_aug = np.append(y_train_aug, y_train_aug[i])
                 count+=2
-            
+
             # Add the rotated image to the dataset
             X_train_aug = np.concatenate((X_train_aug, rot_imgs))
             angle += 10
@@ -230,7 +225,7 @@ n_train = np.shape(X_train_aug)[0]
     Augmented training set size =  112075
 
 
-    
+
 
 
 #### Sample image from augmented dataset
@@ -262,7 +257,7 @@ for i in range(len(y_train_aug)):
         sign_aug_dict[y_train_aug[i]] += 1
     else:
         sign_aug_dict[y_train_aug[i]] = 1
-        
+
 %matplotlib inline
 plt.rcParams['figure.figsize'] = (10,15)
 fig, ax = plt.subplots()
@@ -322,66 +317,66 @@ def lenet(x):
     conv1 = tf.nn.conv2d(x, w_l1, strides=[1,1,1,1], padding='VALID')
     conv1 = tf.nn.bias_add(conv1, b_l1)
     conv1 = tf.nn.relu(conv1)
-    
+
     # Layer 2: Convolution, input=30x30x6, output=28x28x12
     w_l2 = tf.Variable(tf.truncated_normal(shape=(3,3,6,12), mean=0.0, stddev=0.1))
     b_l2 = tf.Variable(tf.zeros(12))
     conv2 = tf.nn.conv2d(conv1, w_l2, strides=[1,1,1,1], padding='VALID')
     conv2 = tf.nn.bias_add(conv2, b_l2)
     conv2 = tf.nn.relu(conv2)
-    
+
     # Layer 3: Max Pooling, input=28x28x12, output=14x14x12
     maxpool1 = tf.nn.max_pool(conv2, ksize=[1,2,2,1], strides=[1,2,2,1], padding='VALID')
-    
+
     # Layer 4 Convolution, input=14x14x12, output=12x12x24
     w_l3 = tf.Variable(tf.truncated_normal(shape=(3,3,12,24), mean=0.0, stddev=0.1))
     b_l3 = tf.Variable(tf.zeros(24))
     conv3 = tf.nn.conv2d(maxpool1, w_l3, strides=[1,1,1,1,], padding='VALID')
     conv3 = tf.nn.bias_add(conv3, b_l3)
     conv3 = tf.nn.relu(conv3)
-    
+
     # Layer 5: Convolution, input=12x12x24, output=10x10x48
     w_l4 = tf.Variable(tf.truncated_normal(shape=(3,3,24,48), mean=0.0, stddev=0.1))
     b_l4 = tf.Variable(tf.zeros(48))
     conv4 = tf.nn.conv2d(conv3, w_l4, strides=[1,1,1,1], padding='VALID')
     conv4 = tf.nn.bias_add(conv4, b_l4)
     conv4 = tf.nn.relu(conv4)
-    
+
     # Layer 6: Max Pooling, input=10x10x48, output=5x5x48
     maxpool2 = tf.nn.max_pool(conv4, ksize=[1,2,2,1], strides=[1,2,2,1], padding='VALID')
-    
+
     # Flatten output of layer 6
     x_flat = tf.contrib.layers.flatten(maxpool2)
-    
+
     # Layer 7: Fully-connected layer, input=1200, output=600
     w_fc1 = tf.Variable(tf.truncated_normal(shape=(1200, 600), mean=0.0, stddev=0.1))
     b_fc1 = tf.Variable(tf.zeros(600))
     fc1 = tf.add(tf.matmul(x_flat, w_fc1), b_fc1)
     fc1 = tf.nn.relu(fc1)
-    
+
     # Layer 8: Fully-connected layer, input=600, output=300
     w_fc2 = tf.Variable(tf.truncated_normal(shape=(600, 300), mean=0.0, stddev=0.1))
     b_fc2 = tf.Variable(tf.zeros(300))
     fc2 = tf.add(tf.matmul(fc1, w_fc2), b_fc2)
     fc2 = tf.nn.relu(fc2)
-    
+
     # Layer 9: Fully-connected layer, input=300, output=150
     w_fc3 = tf.Variable(tf.truncated_normal(shape=(300,150), mean=0.0, stddev=0.1))
     b_fc3 = tf.Variable(tf.zeros(150))
     fc3 = tf.add(tf.matmul(fc2, w_fc3), b_fc3)
     fc3 = tf.nn.relu(fc3)
-    
+
     # Layer 10: Fully-connected layer, input=150, output=75
     w_fc4 = tf.Variable(tf.truncated_normal(shape=(150,75), mean=0.0, stddev=0.1))
     b_fc4 = tf.Variable(tf.zeros(75))
     fc4 = tf.add(tf.matmul(fc3, w_fc4), b_fc4)
     fc4 = tf.nn.relu(fc4)
-    
+
     # Layer 11: Fully-connected layer, input=75, output=n_classes
     w_fc5 = tf.Variable(tf.truncated_normal(shape=(75,n_classes), mean=0.0, stddev=0.1))
     b_fc5 = tf.Variable(tf.zeros(n_classes))
     fc5 = tf.add(tf.matmul(fc4, w_fc5), b_fc5)
-    
+
     return fc5
 ```
 
@@ -430,21 +425,21 @@ with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
     num_examples = len(y_train_aug)
     print("Training ...")
-    
+
     for i in range(EPOCHS):
         X_train_aug, y_train_aug = shuffle(X_train_aug, y_train_aug)
         for offset in range(0, num_examples, BATCH_SIZE):
             X_batch, y_batch = X_train_aug[offset:offset+BATCH_SIZE],y_train_aug[offset:offset+BATCH_SIZE]
             sess.run(training_operation, feed_dict={x:X_batch, y:y_batch})
-        
+
         validation_accuracy = evaluate(X_valid, y_valid)
         print("EPOCH = ", i)
         print("Validation Accuracy = ", validation_accuracy)
-        
+
     # Test accuracy on test set
     test_accuracy = evaluate(X_test, y_test)
     print("\nTest set accuracy = ", test_accuracy)
-    
+
     # Save Trained model
     saver.save(sess, "./lenet/")
     print("Saved trained model")
@@ -511,7 +506,7 @@ with tf.Session() as sess:
     Validation Accuracy =  0.965532879819
     EPOCH =  29
     Validation Accuracy =  0.975056689342
-    
+
     Test set accuracy =  0.964449722731
     Saved trained model
 
@@ -619,7 +614,7 @@ correct_predict = 0
 for i in range(len(predict_list)):
     if(y_newimages[i] == predict_list[i]):
         correct_predict+=1
-        
+
 print("Prediction accuracy of test images = ", (float(correct_predict)/num_images)*100, "%")
 ```
 
@@ -627,7 +622,7 @@ print("Prediction accuracy of test images = ", (float(correct_predict)/num_image
 
 
 #### Remarks:
-The model labelled 7 out of 8 traffic signs accurately. The validation-set accuracy is 97.5% and the test-set accuracy is 96.44%. It seems like the model is overfitting, addition of droupout layers could resolve this problem. 
+The model labelled 7 out of 8 traffic signs accurately. The validation-set accuracy is 97.5% and the test-set accuracy is 96.44%. It seems like the model is overfitting, addition of droupout layers could resolve this problem.
 
 ## Further analysis of model
 
@@ -650,8 +645,8 @@ with tf.Session() as sess:
         fig, ax = plt.subplots()
         ax.barh(idx, values, width, align='center', color='blue')
         ax.set_yticklabels(names, minor=False)
-                
-        
+
+
 ```
 
 
