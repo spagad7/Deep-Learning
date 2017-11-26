@@ -3,7 +3,7 @@ from tensorflow.examples.tutorials.mnist import input_data
 
 tf.reset_default_graph()
 
-mnist = input_data.read_data_sets("dataset/", one_hot=True, reshape=False)
+mnist = input_data.read_data_sets("../Datasets/MNIST/", one_hot=True, reshape=False)
 
 n_inputs = 784
 n_hidden = 256

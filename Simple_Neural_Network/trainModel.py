@@ -4,7 +4,7 @@ from tensorflow.examples.tutorials.mnist import input_data
 tf.reset_default_graph()
 
 # Read dataset
-mnist = input_data.read_data_sets("dataset/", one_hot=True, reshape=False)
+mnist = input_data.read_data_sets("../Datasets/MNIST/", one_hot=True, reshape=False)
 
 # Set parameters
 n_inputs = 784
