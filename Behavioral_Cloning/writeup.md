@@ -103,7 +103,7 @@ I have documented the training process in the [Creation of Training Set and Trai
 
 #### 11. Is the car able to navigate correctly on test data?
 
-Here is the link to video of the car driving in autonomous mode on [track 1](#videos/track_1_autonomous.mp4) and [track 2](#videos/track_2_autonomous.mp4).
+Here is the link to video of the car driving in autonomous mode on [track 1](videos/track_1_autonomous.mp4) and [track 2](videos/track_2_autonomous.mp4).
 
 
 ## Network Architecture and Training Strategy

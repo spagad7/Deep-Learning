@@ -83,9 +83,9 @@ Pre-processing the data only improved the training performance, but the car didn
 ![alt text][image1]
 ![alt text][image2]
 
-The result of the above modifications were decent, the car mostly stayed on the track on straight roads, but it still had difficulty in staying on the track in curves. [Here](#images/lenet_architecture.png) is the link to the network architecture of LeNet-5 based model
+The result of the above modifications were decent, the car mostly stayed on the track on straight roads, but it still had difficulty in staying on the track in curves. [Here](images/lenet_architecture.png) is the link to the network architecture of LeNet-5 based model
 
-Next, I tried the model described in [comma.ai](https://github.com/commaai/research/blob/master/train_steering_model.py) github page. This model consists of 7 layers which includes, 1 normalization layer followed by 3 convolution layers, a dropout layer, fully connected layer and finally another dropout layer. This model performed similar to the LeNet-5 based model. [Here](#images/comma_architecture.png) is the link to the network architecture of Comma.ai model
+Next, I tried the model described in [comma.ai](https://github.com/commaai/research/blob/master/train_steering_model.py) github page. This model consists of 7 layers which includes, 1 normalization layer followed by 3 convolution layers, a dropout layer, fully connected layer and finally another dropout layer. This model performed similar to the LeNet-5 based model. [Here](images/comma_architecture.png) is the link to the network architecture of Comma.ai model
 
 Finally, I implemented the network architecture described in [End to End Learning for Self-Driving Cars](https://devblogs.nvidia.com/parallelforall/deep-learning-self-driving-cars/) research paper published by Autonomous Vehicle team at Nvidia. I modified the architecture by adding the cropping layer after normalization so that the network can train only on the useful information in the training images. This network worked well and the car stayed on center of the center track all the time, even in the curves, and the car drove smoother than the LeNet-5 based model. Overall, the Nvidia model produced the best results.
 
