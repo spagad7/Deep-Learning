@@ -66,7 +66,7 @@ Ex: python drive.py models/model_nvidia.h5 output
 
 ## Output
 
-Here is the link to video of the car driving in autonomous mode on [track 1](#videos/track_1_autonomous.mp4) and [track 2](#videos/track_2_autonomous.mp4).
+Here is the link to video of the car driving in autonomous mode on [track 1](videos/track_1_autonomous.mp4) and [track 2](videos/track_2_autonomous.mp4).
 
 
 ## Network Architecture and Training Strategy
